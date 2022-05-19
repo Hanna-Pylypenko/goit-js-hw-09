@@ -7,7 +7,6 @@ startBtn.disabled = true;
 startBtn.addEventListener('click', onBtnClick);
 
 const daysNumber = document.querySelector('[data-days]');
-console.log(daysNumber.textContent);
 const hoursNumber = document.querySelector('[data-hours]');
 const minsNumber = document.querySelector('[data-minutes]');
 const secNumber = document.querySelector('[data-seconds]');
