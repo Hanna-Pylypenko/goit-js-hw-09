@@ -7,87 +7,54 @@
 import Notiflix from 'notiflix';
 
 const formRef = document.querySelector('.form');
-formRef.addEventListener('input', onInputAction);
-formRef.addEventListener('submit', createPromises);
 
-let firstDelay;
-let delay;
-let promiseAmount;
+formRef.addEventListener('submit', onSubmitAction);
 
-function onInputAction(evt) {
-  if (evt.target.name === 'delay') {
-    firstDelay = evt.target.value;
-  } else if (evt.target.name === 'step') {
-    delay = evt.target.value;
-  } else {
-    promiseAmount = evt.target.value;
-  }
-}
+let positionCount;
+let delayCount;
 let positions = [];
-for (let i = 0; i <= promiseAmount; i = 1) {
-  const position = i;
-  positions.push(position);
-}
 
-function createPromises(position, delay) {
-  const promise = new Promise((resolve, reject) => {
-    const shouldResolve = Math.random() > 0.3;
+function onSubmitAction(evt) {
+  evt.preventDefault();
+  const firstDelay = parseInt(formRef.delay.value);
+  const delay = parseInt(formRef.step.value);
+  const promiseAmount = formRef.amount.value;
 
-    setTimeout(() => {
-      if (shouldResolve) {
-        resolve;
-      } else {
-        reject;
-      }
-    }, firstDelay);
+  // console.log(firstDelay);
+  // console.log(delay);
+  // console.log(promiseAmount);
+  getPosition(promiseAmount, delay);
+
+  const promises = positions.map(position => {
+    createPromises(position.positionCount, position.delayCount);
   });
 
-  promise
-    .then(({ position, delay }) => {
-      Notiflix.Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
-    })
-    .catch(({ position, delay }) => {
-      Notiflix.Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
+  Promise.all(promises);
+  console.log(Promise.all(promises));
+
+  evt.currentTarget.reset();
+  positions = [];
+
+  function getPosition(promiseAmount, delay) {
+    for (let i = 0; i < promiseAmount; i++) {
+      positionCount = i + 1;
+      delayCount = firstDelay + delay * i;
+      positions.push({ positionCount, delayCount });
+      console.log(delayCount);
+    }
+    console.log(positions);
+  }
+
+  function createPromises(position, delay) {
+    return new Promise((resolve, reject) => {
+      const shouldResolve = Math.random() > 0.3;
+      setTimeout(() => {
+        if (shouldResolve) {
+          resolve(Notiflix.Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`));
+        } else {
+          reject(Notiflix.Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`));
+        }
+      }, delay);
     });
+  }
 }
-
-Notiflix.Notify.init({
-  width: '280px',
-  position: 'top-right',
-  distance: '10px',
-  opacity: 1,
-  borderRadius: '5px',
-  rtl: false,
-  timeout: 3000,
-  messageMaxLength: 110,
-  backOverlay: false,
-  backOverlayColor: 'rgba(0,0,0,0.5)',
-  plainText: true,
-  showOnlyTheLastOne: false,
-  clickToClose: false,
-  pauseOnHover: true,
-
-  ID: 'NotiflixNotify',
-  className: 'notiflix-notify',
-  zindex: 4001,
-  fontFamily: 'Quicksand',
-  fontSize: '13px',
-  cssAnimation: true,
-  cssAnimationDuration: 400,
-  cssAnimationStyle: 'from-right',
-  closeButton: false,
-  useIcon: true,
-  useFontAwesome: false,
-  fontAwesomeIconStyle: 'shadow',
-  fontAwesomeIconSize: '34px',
-
-  failure: {
-    background: '#ff5549',
-    textColor: '#fff',
-    childClassName: 'notiflix-notify-failure',
-    notiflixIconColor: 'rgba(0,0,0,0.2)',
-    fontAwesomeClassName: 'fas fa-times-circle',
-    fontAwesomeIconColor: 'rgba(0,0,0,0.2)',
-    backOverlayColor: 'rgba(255,85,73,0.2)',
-  },
-});
