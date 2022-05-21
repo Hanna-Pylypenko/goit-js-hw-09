@@ -29,8 +29,8 @@ function onSubmitAction(evt) {
     createPromises(position.positionCount, position.delayCount);
   });
 
-  Promise.all(promises);
-  console.log(Promise.all(promises));
+  Promise.all(promises).then(() => console.log(Promise.all(promises)));
+  //console.log(Promise.all(promises));
 
   evt.currentTarget.reset();
   positions = [];
