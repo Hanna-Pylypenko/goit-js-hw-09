@@ -17,3 +17,30 @@ img {
   max-width: 100%;
 }
 
+.timerStart{
+  padding: 20px;
+  background-color: palevioletred;
+  border-radius: 20px;
+  color: white;
+  
+  font-size: 20px;}
+.timerStart:hover{
+  scale: 1.1;
+}
+.timer{
+  font-size: 20px;
+  display: flex;
+  flex-direction: row;
+ 
+}
+.field{
+  margin-right: 20px;
+}
+#datetime-picker{
+  font-size: 20px;
+  padding: 20px;
+  margin-bottom: 20px;
+  margin-right: 20px;
+  text-align: center;
+
+}
