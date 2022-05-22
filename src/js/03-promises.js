@@ -26,7 +26,7 @@ function onSubmitAction(evt) {
   getPosition(promiseAmount, delay);
 
   const promises = positions.map(position => {
-    createPromises(position.positionCount, position.delayCount)
+    createPromise(position.positionCount, position.delayCount)
       .then(result => {
         console.log(result);
       })
@@ -50,7 +50,7 @@ function onSubmitAction(evt) {
     console.log(positions);
   }
 
-  function createPromises(position, delay) {
+  function createPromise(position, delay) {
     return new Promise((resolve, reject) => {
       const shouldResolve = Math.random() > 0.3;
       setTimeout(() => {
