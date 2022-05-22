@@ -22,10 +22,14 @@ img {
   background-color: palevioletred;
   border-radius: 20px;
   color: white;
-  
+  border-style: solid;
   font-size: 20px;}
 .timerStart:hover{
   scale: 1.1;
+}
+.timerStart:active{
+  background-color: bisque;
+  color: #212121;
 }
 .timer{
   font-size: 30px;
@@ -49,4 +53,26 @@ img {
   margin-right: 20px;
   text-align: center;
 
+}
+.switcher{
+  display: flex;
+  justify-content: center;
+  
+}
+.switcher button{
+ font-size: 30px;
+ padding: 20px;
+ margin-right: 10px;
+ border-radius: 10px;
+ background-color: rgb(200, 61, 215);
+ box-shadow: none;
+ color: aliceblue;
+ border-color: aqua;
+ border-style: solid;
+}
+.switcher button:hover{
+  scale: 1.1;
+}
+.switcher button:active{
+  background-color: antiquewhite;
 }
