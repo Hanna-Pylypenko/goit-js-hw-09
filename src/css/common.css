@@ -64,10 +64,10 @@ img {
  padding: 20px;
  margin-right: 10px;
  border-radius: 10px;
- background-color: rgb(200, 61, 215);
+ background-color: rgb(228, 161, 236);
  box-shadow: none;
- color: aliceblue;
- border-color: aqua;
+ color: white;
+ border-color: pink;
  border-style: solid;
 }
 .switcher button:hover{
