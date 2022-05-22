@@ -35,6 +35,8 @@ img {
 }
 .field{
   margin-right: 20px;
+  display: flex;
+  flex-direction: column;
 }
 #datetime-picker{
   font-size: 20px;
