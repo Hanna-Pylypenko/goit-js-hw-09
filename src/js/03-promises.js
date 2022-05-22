@@ -26,11 +26,16 @@ function onSubmitAction(evt) {
   getPosition(promiseAmount, delay);
 
   const promises = positions.map(position => {
-    createPromises(position.positionCount, position.delayCount);
+    createPromises(position.positionCount, position.delayCount)
+      .then(result => {
+        console.log(result);
+      })
+      .catch(error => {
+        console.log(error);
+      });
   });
 
   Promise.all(promises).then(() => console.log(Promise.all(promises)));
-  //console.log(Promise.all(promises));
 
   evt.currentTarget.reset();
   positions = [];
