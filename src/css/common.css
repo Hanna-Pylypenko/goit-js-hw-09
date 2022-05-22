@@ -28,18 +28,22 @@ img {
   scale: 1.1;
 }
 .timer{
-  font-size: 20px;
+  font-size: 30px;
+  
   display: flex;
   flex-direction: row;
+  padding-left: 30px;
  
 }
 .field{
   margin-right: 20px;
   display: flex;
   flex-direction: column;
+  text-align: center;
+  font-size: 25;
 }
 #datetime-picker{
-  font-size: 20px;
+  font-size:25px;
   padding: 20px;
   margin-bottom: 20px;
   margin-right: 20px;
