@@ -1,9 +1,3 @@
-//Напиши скрипт, який на момент сабміту форми викликає
-//функцію createPromise(position, delay) стільки разів,
-// скільки ввели в поле amount.
-//Під час кожного виклику передай їй номер промісу(position), що створюється,
-//і затримку, враховуючи першу затримку(delay),
-// введену користувачем, і крок(step).
 import Notiflix from 'notiflix';
 
 const formRef = document.querySelector('.form');
@@ -20,23 +14,14 @@ function onSubmitAction(evt) {
   const delay = parseInt(formRef.step.value);
   const promiseAmount = formRef.amount.value;
 
-  // console.log(firstDelay);
-  // console.log(delay);
-  // console.log(promiseAmount);
   getPosition(promiseAmount, delay);
 
   const promises = positions.map(position => {
-    createPromise(position.positionCount, position.delayCount)
-      .then(result => {
-        console.log(result);
-      })
-      .catch(error => {
-        console.log(error);
-      });
+    createPromise(position.positionCount, position.delayCount);
+    console.log(createPromise(position.positionCount, position.delayCount));
   });
 
-  Promise.all(promises).then(() => console.log(Promise.all(promises)));
-
+  Promise.all(promises);
   evt.currentTarget.reset();
   positions = [];
 
@@ -51,7 +36,7 @@ function onSubmitAction(evt) {
   }
 
   function createPromise(position, delay) {
-    return new Promise((resolve, reject) => {
+    const promise = new Promise((resolve, reject) => {
       const shouldResolve = Math.random() > 0.3;
       setTimeout(() => {
         if (shouldResolve) {
@@ -61,5 +46,8 @@ function onSubmitAction(evt) {
         }
       }, delay);
     });
+    return promise
+      .then(() => console.log(`✅ Fulfilled promise ${position} in ${delay}ms`))
+      .catch(() => console.log(`❌ Rejected promise ${position} in ${delay}ms`));
   }
 }
