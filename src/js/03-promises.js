@@ -21,9 +21,12 @@ function onSubmitAction(evt) {
         console.log(error);
       });
   });
+
   Promise.all(promises).then(() => console.log(Promise.all(promises)));
+
   evt.currentTarget.reset();
   positions = [];
+
   function getPosition(promiseAmount, delay) {
     for (let i = 0; i < promiseAmount; i++) {
       positionCount = i + 1;
