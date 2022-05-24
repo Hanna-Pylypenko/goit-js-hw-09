@@ -12,17 +12,17 @@ function onSubmitAction(evt) {
 
   getPosition(promiseAmount, delay);
 
-  const promises = positions.map(position => {
+  positions.map(position => {
     createPromise(position.positionCount, position.delayCount)
-      .then(result => {
-        console.log(result);
+      .then(res => {
+        Notiflix.Notify.success(res);
+        console.log(res);
       })
       .catch(error => {
+        Notiflix.Notify.failure(error);
         console.log(error);
       });
   });
-
-  Promise.all(promises).then(() => console.log(Promise.all(promises)));
 
   evt.currentTarget.reset();
   positions = [];
@@ -40,9 +40,9 @@ function onSubmitAction(evt) {
       const shouldResolve = Math.random() > 0.3;
       setTimeout(() => {
         if (shouldResolve) {
-          resolve(Notiflix.Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`));
+          resolve(`✅ Fulfilled promise ${position} in ${delay}ms`);
         } else {
-          reject(Notiflix.Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`));
+          reject(`❌ Rejected promise ${position} in ${delay}ms`);
         }
       }, delay);
     });
